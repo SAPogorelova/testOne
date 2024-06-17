@@ -2,15 +2,18 @@
 #Даны два списка чисел, которые могут содержать до 10000 чисел каждый. Выведите все числа,
 #которые входят как в первый, так и во второй список в порядке возрастания.
 
-#Решение:
+# Решение:
 list1 = [0, 2, 8, 100, 101, 1000, 1001, 9000, 4000]
 list2 = [1, 5, 10000, 8, 3, 100, 1000]
-new_list = list1 + list2
-#объединяем списки
-list_non_dublicates = list(dict.fromkeys(new_list))
-#удаляем дубликаты
+list1_set = set(list1)
+list2_set = set(list2)
+union_set = list2_set.union(list1_set)
+# объединяем списки
+
+list_non_dublicates = list(dict.fromkeys(union_set))
+# удаляем дубликаты
 list_non_dublicates_sorted = sorted(list_non_dublicates)
-#сортируем
+# сортируем
 
 print(list_non_dublicates_sorted)
 
