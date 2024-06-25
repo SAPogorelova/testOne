@@ -131,3 +131,51 @@ print(play(player1,player2))
 
 Ответ:
 
+def encrypt(text, shift):
+# encrypt - функция для зашифровки текста
+    encrypted_text = "" # Инициализация строки для зашифрованного текста
+    for char in text: # Цикл по каждому символу в исходном тексте
+        if char.isalpha():  # Проверка, является ли символ буквой
+            shifted = ord(char) + shift  # Сдвигаем символ
+            if char.islower():  # Проверка и корректировка для строчных букв (a-z)
+                if shifted > ord('z'):
+                    shifted -= 26 # корректировка значения таким образом, чтобы после сдвига оно снова попало в диапазон строчных букв алфавита
+                encrypted_text += chr(shifted)
+            # ord(char)` возвращает ASCII код символа, chr(shifted)` преобразует ASCII код обратно в символ.
+            elif char.isupper():  # Проверка и корректировка Для заглавных букв
+                if shifted > ord('Z'):
+                    shifted -= 26
+                encrypted_text += chr(shifted)
+        else:
+            encrypted_text += char  # Добавление неизмененных символов (не букв). Не меняем символы, которые не являются буквами
+    return encrypted_text # Возврат зашифрованного текста
+
+def decrypt(encrypted_text, shift): # Функция `decrypt` - расшифровка, работает аналогично encrypt
+    decrypted_text = ""
+    for char in encrypted_text:
+        if char.isalpha():  # Проверка, является ли символ буквой
+            shifted = ord(char) - shift  # Сдвигаем символ назад
+            if char.islower():  # Для строчных букв
+                if shifted < ord('a'):
+                    shifted += 26
+                decrypted_text += chr(shifted)
+            elif char.isupper():  # Для заглавных букв
+                if shifted < ord('A'):
+                    shifted += 26
+                decrypted_text += chr(shifted)
+        else:
+            decrypted_text += char  # Не меняем символы, которые не являются буквами
+    return decrypted_text
+
+# Задаем значения
+text = "Hello, World!"
+shift = 2
+
+# Зашифровка
+encrypted_text = encrypt(text, shift)
+print(f"Зашифрованный текст: {encrypted_text}")
+
+# Расшифровка
+decrypted_text = decrypt(encrypted_text, shift)
+print(f"Расшифрованный текст: {decrypted_text}")
+
